@@ -25,7 +25,6 @@ def get_user(username):
   sql = "select * from users where username = '" + username + "'"
   mycursor.execute(sql)
   myresult = mycursor.fetchall()
-
   return myresult
 
 def log_in(username, password):
@@ -38,6 +37,47 @@ def log_in(username, password):
 
   return {"code":0, "msg": "SUCCESS"}
 
+def log_action(username, action, points):
+  sql = "insert into history (username, action, points) values (%s, %s, %s)"
+  vals = (username, action, points)
+  mycursor.execute(sql, vals)
+
+  user_data = get_user(username)
+  prev_points = user_data[0][2]
+  sql = "update users set points = %s where username = %s"
+  vals = (int(points) + prev_points, username)
+  mycursor.execute(sql, vals)
+
+  mydb.commit()
+
+def log_active_request(latitude, longitude, action, message):
+  sql = "insert into active_requests (latitude, longitude, action, message) values (%s, %s, %s, %s)"
+  vals = (latitude, longitude, action, message)
+  mycursor.execute(sql, vals)
+  mydb.commit()
+
+def get_request_data(latitude, longitude):
+  sql = "select * from active_requests where latitude = '%s' and longitude = '%s'"
+  vals = (latitude, longitude)
+  mycursor.execute(sql, vals)
+  myresult = mycursor.fetchall()
+  return myresult
+
+def rm_requests(latitude, longitude):
+  sql = "delete from active_requests where latitude = '%s' and longitude = '%s'"
+  vals = (latitude, longitude)
+  mycursor.execute(sql, vals)
+  mydb.commit()
+
+# log_action("aster", "report", 1)
+# log_active_request(1000, 1000, "report", "asdfghjk")
+# log_action("aster", "pickup", 10)
+# log_action("aster", "report", 1)
+# log_active_request(1000, 1001, "report", "asdfghjk")
+# log_action("aster", "report", 1)
+# log_active_request(1000, 1001, "report", "asdfghjk")
+# rm_requests(1000, 1001)
+# print(get_request_data(1000, 1000))
 
 # print(add_user("aster", "pass", "a", "b", "c"))
 # print(get_user("aster"))
