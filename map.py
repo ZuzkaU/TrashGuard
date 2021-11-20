@@ -57,7 +57,6 @@ def getMap():
 
     if show_active_requests:
         active_requests = database.get_active_requests()
-        print(active_requests)
         for node in active_requests:
             idd = node[3] + str(id_counter)
             id_counter += 1

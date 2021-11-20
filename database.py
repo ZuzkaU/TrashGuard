@@ -25,7 +25,9 @@ def get_user(username):
   sql = "select * from users where username = '" + username + "'"
   mycursor.execute(sql)
   myresult = mycursor.fetchall()
-  return myresult
+  if myresult == []:
+    return myresult
+  return myresult[0]
 
 def log_in(username, password):
   data = get_user(username)
@@ -76,12 +78,12 @@ def rm_requests(latitude, longitude):
   mydb.commit()
 
 
-lat, lon = 48.1105110, 11.5839377
-log_active_request(lat, lon, "report", "asdfghjk")
-lat, lon = 48.1105110, 11.5839377
-log_active_request(lat, lon, "report", "asdfghjk")
-lat, lon = 48.1096278, 11.5845053
-log_active_request(lat, lon, "report", "asdfghjk")
+# lat, lon = 48.1105110, 11.5839377
+# log_active_request(lat, lon, "report", "asdfghjk")
+# lat, lon = 48.1105110, 11.5839377
+# log_active_request(lat, lon, "report", "asdfghjk")
+# lat, lon = 48.1096278, 11.5845053
+# log_active_request(lat, lon, "report", "asdfghjk")
 
 # log_action("aster", "report", 1)
 # log_active_request(1000, 1000, "report", "asdfghjk")
