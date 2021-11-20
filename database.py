@@ -29,6 +29,12 @@ def get_user(username):
     return myresult
   return myresult[0]
 
+def get_history(username):
+  sql = "select * from history where username = '" + username + "'"
+  mycursor.execute(sql)
+  myresult = mycursor.fetchall()
+  return myresult
+
 def log_in(username, password):
   data = get_user(username)
   if not data:
@@ -38,6 +44,12 @@ def log_in(username, password):
     return {"code":3, "msg": "Username and password do not match"}
 
   return {"code":0, "msg": "SUCCESS"}
+
+def update_user_data(username, name, email, address):
+  sql = "update users set name = %s, phone = %s, address = %s where username = %s"
+  vals = (name, email, address, username)
+  mycursor.execute(sql, vals)
+  mydb.commit()
 
 def log_action(username, action, points):
   sql = "insert into history (username, action, points) values (%s, %s, %s)"

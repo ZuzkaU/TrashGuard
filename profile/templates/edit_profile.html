@@ -21,7 +21,7 @@
                     <form action="{{ url_for('edit_user_data', username = username) }}" method="post">
                         <div class="col-sm-3">
                           <h6 class="mb-0">Full Name</h6>
-                          <input type="text" placeholder={{ name }} name="name">
+                          <input type="text" placeholder="{{ name }}" name="name">
                         </div>
 
                       </div>
@@ -31,16 +31,7 @@
                           <h6 class="mb-0">Email</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          <input type="text" placeholder={{ email }} name="name">
-                        </div>
-                      </div>
-                      <hr>
-                      <div class="row">
-                        <div class="col-sm-3">
-                          <h6 class="mb-0">Mobile</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                          <input type="text" placeholder={{ phone }} name="name">
+                          <input type="text" placeholder="{{ email }}" name="email">
                         </div>
                       </div>
                       <hr>
@@ -49,7 +40,7 @@
                           <h6 class="mb-0">Address</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          <input type="text" placeholder={{ address }} name="name">
+                          <input type="text" placeholder="{{ address }}" name="address">
                         </div>
                       </div>
                       <hr>
