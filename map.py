@@ -3,44 +3,53 @@ import overpy
 
 def getMap():
     lat, lon = 48.11004353217281, 11.587360738996582
+    area = 1000
 
     id_counter = 0
     markers = ''
+    
     api = overpy.Overpass()
-    # Define the query
-    query = """(node["shop"](around:500,{lat},{lon});
-            node["building"="retail"](around:500,{lat},{lon});
-            node["building"="supermarket"](around:500,{lat},{lon});
-            node["healthcare"="pharmacy"](around:500,{lat},{lon});
-            );out;""".format(lat=lat, lon=lon)
+    
+    show_waste_baskets = True
+    show_waste_disposal = True
+    show_recycling = True
 
-    # Call the API
-    shops = api.query(query)
-
-
-    for node in shops.nodes:
-
-            # Create unique ID for each marker
-            idd = 'shop' + str(id_counter)
+    if show_waste_baskets:
+        waste_baskets_query = """(node["amenity"="waste_basket"](around:{area},{lat},{lon}););out;""".format(area=area, lat=lat, lon=lon)
+        waste_baskets = api.query(waste_baskets_query)
+        for node in waste_baskets.nodes:
+            idd = 'waste_basket' + str(id_counter)
             id_counter += 1
+            markers += "var {idd} = L.marker([{latitude}, {longitude}], {{icon: waste_basket_icon}});\
+                        {idd}.addTo(map).bindPopup('{name}');".format(idd=idd, latitude=node.lat,\
+                        longitude=node.lon,
+                        name='Waste basket')
 
-            # Check if shops have name and website in OSM
-            try:
-                shop_brand = node.tags['brand']
-            except:
-                shop_brand = 'null'
 
-            try:
-                shop_website = node.tags['website']
-            except:
-                shop_website = 'null'
+    if show_waste_disposal:
+        waste_disposal_query = """(node["amenity"="waste_disposal"](around:{area},{lat},{lon}););out;""".format(area=area, lat=lat, lon=lon)
+        waste_disposal = api.query(waste_disposal_query)
+        for node in waste_disposal.nodes:
+            idd = 'waste_disposal' + str(id_counter)
+            id_counter += 1
+            markers += "var {idd} = L.marker([{latitude}, {longitude}], {{icon: waste_disposal_icon}});\
+                        {idd}.addTo(map).bindPopup('{name}');".format(idd=idd, latitude=node.lat,\
+                        longitude=node.lon,
+                        name='Waste disposal')
 
-            # Create the marker and its pop-up for each shop
-            markers += "var {idd} = L.marker([{latitude}, {longitude}]);\
-                        {idd}.addTo(map).bindPopup('{brand}<br>{website}');".format(idd=idd, latitude=node.lat,\
-                                                                                     longitude=node.lon,
-                                                                                     brand=shop_brand,\
-                                                                                     website=shop_website)
+    if show_recycling:
+        recycling_query = """(node["amenity"="recycling"](around:{area},{lat},{lon}););out;""".format(area=area, lat=lat, lon=lon)
+        recycling = api.query(recycling_query)
+        for node in recycling.nodes:
+            idd = 'recycling' + str(id_counter)
+            id_counter += 1
+            markers += "var {idd} = L.marker([{latitude}, {longitude}], {{icon: recycling_icon}});\
+                        {idd}.addTo(map).bindPopup('{name}');".format(idd=idd, latitude=node.lat,\
+                        longitude=node.lon,
+                        name='Recycling')
+    
+    
 
     # Render the page with the map
     return render_template('map.html', markers=markers, lat=lat, lon=lon)
+    
