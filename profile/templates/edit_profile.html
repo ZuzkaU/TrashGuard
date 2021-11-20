@@ -18,8 +18,8 @@
                 <div class="card-body">
                   <div class="row">
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
-                    <form action="{{ url_for('handle_data') }}" method="post">
-                        <input type="text" name="edit_user_data">
+                    <form action="{{ url_for('edit_user_data', username = username) }}" method="post">
+                        <input type="text" name="name">
                         <input type="submit">
                     </form>
                     <div class="col-sm-3">
@@ -73,28 +73,6 @@
                   </div>
                 </div>
               </div>
-
-              <div class="row gutters-sm">
-                <div class="col-sm-6 mb-3">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><class="material-icons text-info mr-2">History</h6>
-                      <ol>
-                        <!-- For loop logic of jinja template -->
-                        {%for i in range(0, leng)%}
-                          
-                            <li>
-                              <small>{{ history[i].type }} {{ history[i].location }} +{{ history[i].points }}p</small>
-                              <div class="progress mb-3" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </li>
-                        {%endfor%}
-                          
-                        </ol>
-                  </div>
-                </div>
-            </div>
           </div>
 
         </div>
