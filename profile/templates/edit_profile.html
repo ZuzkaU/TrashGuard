@@ -18,7 +18,10 @@
                 <div class="card-body">
                   <div class="row">
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
-
+                    <form action="{{ url_for('handle_data') }}" method="post">
+                        <input type="text" name="edit_user_data">
+                        <input type="submit">
+                    </form>
                     <div class="col-sm-3">
                       <h6 class="mb-0">Full Name</h6>
                     </div>
@@ -65,7 +68,7 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
-                      <a class="btn btn-info " target="__blank" href="http://127.0.0.1:8000/edit/users/1">Edit</a>
+                      <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
                     </div>
                   </div>
                 </div>
