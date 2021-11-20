@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template
 import overpy
 import requests, json
+import database
 
 def getMap():
     area = 5000
@@ -20,6 +21,7 @@ def getMap():
     show_waste_baskets = False
     show_waste_disposal = False
     show_recycling = True
+    show_active_requests = True
 
     if show_waste_baskets:
         waste_baskets_query = """(node["amenity"="waste_basket"](around:{area},{lat},{lon}););out;""".format(area=area, lat=lat, lon=lon)
@@ -50,8 +52,19 @@ def getMap():
         for node in recycling.nodes:
             idd = 'recycling' + str(id_counter)
             id_counter += 1
-    
             markers += "markers.addLayer(L.marker([{latitude}, {longitude}], {{icon: recycling_icon}}).bindPopup('{name}'));".format(idd=idd, latitude=node.lat, longitude=node.lon, name='Recycling');
+
+
+    if show_active_requests:
+        active_requests = database.get_active_requests()
+        print(active_requests)
+        for node in active_requests:
+            idd = node[3] + str(id_counter)
+            id_counter += 1
+            markers += "var {idd} = L.marker([{latitude}, {longitude}]);\
+                        {idd}.addTo(map).bindPopup('{name}');".format(idd=idd, latitude=node[1],\
+                        longitude=node[2],
+                        name=node[4])
     
     markers += "map.addLayer(markers);"
     # Render the page with the map

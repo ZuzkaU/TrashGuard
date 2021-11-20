@@ -63,11 +63,25 @@ def get_request_data(latitude, longitude):
   myresult = mycursor.fetchall()
   return myresult
 
+def get_active_requests():
+  sql = "select * from active_requests"
+  mycursor.execute(sql)
+  myresult = mycursor.fetchall()
+  return myresult
+
 def rm_requests(latitude, longitude):
   sql = "delete from active_requests where latitude = '%s' and longitude = '%s'"
   vals = (latitude, longitude)
   mycursor.execute(sql, vals)
   mydb.commit()
+
+
+lat, lon = 48.1105110, 11.5839377
+log_active_request(lat, lon, "report", "asdfghjk")
+lat, lon = 48.1105110, 11.5839377
+log_active_request(lat, lon, "report", "asdfghjk")
+lat, lon = 48.1096278, 11.5845053
+log_active_request(lat, lon, "report", "asdfghjk")
 
 # log_action("aster", "report", 1)
 # log_active_request(1000, 1000, "report", "asdfghjk")
@@ -100,8 +114,8 @@ def rm_requests(latitude, longitude):
 
 # CREATE TABLE active_requests(
 #     request_id INT AUTO_INCREMENT PRIMARY KEY,
-#     latitude INT NOT NULL,
-#     longitude INT NOT NULL,
+#     latitude VARCHAR(255) NOT NULL,
+#     longitude VARCHAR(255) NOT NULL,
 #     action VARCHAR(255),
 #     message VARCHAR(255)
 # );
