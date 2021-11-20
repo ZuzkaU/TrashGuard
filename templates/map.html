@@ -9,6 +9,19 @@
 
     <script>
         var map = L.map('map').setView([{{lat}}, {{lon}}], 16);
+        var WasteIcon = L.Icon.extend({
+            options: {
+                shadowUrl: 'leaf-shadow.png',
+                iconSize:     [27, 40],
+                iconAnchor:   [13, 40],
+                popupAnchor:  [1, -30]
+            }
+        });
+        
+        var waste_basket_icon = new WasteIcon({iconUrl: 'static/icons/waste_bin.png'}),
+            waste_disposal_icon = new WasteIcon({iconUrl: 'static/icons/recycling.png'}),
+            waste_disposal_icon = new WasteIcon({iconUrl: 'static/icons/waste_disposal.png'});
+            
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors'}).addTo(map);
 
         {{markers|safe}}
