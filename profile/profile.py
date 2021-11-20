@@ -20,9 +20,8 @@ class History:
 def profile(username):
        if request.method == 'GET':
               user_data = get_user(_username)
-
-              history1 = History(_type = "Reported trash at", points = 10, location = "Arcisstrasse")
-              history2 = History(_type = "Picked up trash at", points = 100, location = "Marienplatz")
+              # history1 = History(_type = "Reported trash at", points = 10, location = "Arcisstrasse")
+              # history2 = History(_type = "Picked up trash at", points = 100, location = "Marienplatz")
               history_data = get_history(_username) # [history1, history2]
               history = map(lambda x: history(_type = x.action, points = x.points, timestamp = x.timestamp))
               history_points = map(lambda a: a.points, history)
