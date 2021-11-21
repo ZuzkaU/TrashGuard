@@ -56,8 +56,12 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
-                      <a class="btn btn-info " target="__blank" href="http://127.0.0.1:8000/edit/{{username}}">Edit</a>
-                      <a class="btn btn-info " target="__blank" href="http://127.0.0.1:8000/signout">Sign out</a>
+                      <a class="btn btn-info " target="__blank" href="edit/{{username}}">Edit</a>
+                      <a class="btn btn-info ">
+                        <form action="" method="post">
+                          <input type="submit" name="signout" value="Sign out" />
+                        </form>
+                      </a>
                     </div>
                   </div>
                 </div>
