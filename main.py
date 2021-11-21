@@ -38,6 +38,8 @@ def login():
 	global current_user
 
 	if request.method == 'GET':
+		if current_user:
+			return redirect('/user/'+current_user)
 		return render_template('login.html') 
 
 	if request.method == 'POST':

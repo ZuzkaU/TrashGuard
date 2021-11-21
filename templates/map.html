@@ -62,18 +62,14 @@
   <div class="dropdown" style="left:20;">
     <button class="dropbtn"><b>Menu</b></button>
     <div class="dropdown-content" style="left:0;">
-      <a>
-      <form action="" method="post">
-        <input type="submit" name="profile" value="Profile" />
-      </form>
-      </a>
-    
+      <a href='/login'>Profile</a>
       <a href="#">Information</a>
     </div>
   </div>
 
     <div id="map"></div>
 
+    </script>
 
     <script>
         var map = L.map('map', {zoomControl: false}).setView([{{lat}}, {{lon}}], 18);
