@@ -4,14 +4,14 @@ import requests, json
 import database
 
 def getMap():
-    area = 5000
+    area = 10000
     
     url = 'https://api.freegeoip.app/json/{}?apikey=a7428a00-4a36-11ec-8912-ef59e2b118f7'.format(request.remote_addr)
     response = requests.get(url)
     location = json.loads(response.text)
     lat = location['latitude']
     lon = location['longitude']
-    lat, lon = 48.11004353217281, 11.587360738996582
+    lat, lon = 48.1431647, 11.5747058
 
     id_counter = 0
     
