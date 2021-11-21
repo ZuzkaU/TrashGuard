@@ -106,13 +106,27 @@
             
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors'}).addTo(map);
         
-        var markers = L.markerClusterGroup({showCoverageOnHover: false});
-        {{markers|safe}}
-        map.addLayer(markers);
+        var baskets = L.markerClusterGroup({showCoverageOnHover: false});
+        {{baskets|safe}}
+        map.addLayer(baskets);
         
+        var disposal = L.markerClusterGroup({showCoverageOnHover: false});
+        {{disposal|safe}}
+        map.addLayer(disposal);
+        
+        var recycling = L.markerClusterGroup({showCoverageOnHover: false});
+        {{recycling|safe}}
+        map.addLayer(recycling);
+        
+        var reported = L.markerClusterGroup({showCoverageOnHover: false});
+        {{reported|safe}}
+        map.addLayer(reported);
         
         var overlayMaps = {
-            "Markers": markers
+            "Waste Baskets": baskets,
+            "Waste Disposal": disposal,
+            "Recycling Bins": recycling,
+            "Reported Trash": reported
         };
         L.control.layers({}, overlayMaps).addTo(map);
         
