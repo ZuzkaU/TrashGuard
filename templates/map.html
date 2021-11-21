@@ -86,7 +86,12 @@
         var waste_basket_icon = new WasteIcon({iconUrl: 'static/icons/waste_bin.png'}),
             recycling_icon = new WasteIcon({iconUrl: 'static/icons/recycling.png'}),
             waste_disposal_icon = new WasteIcon({iconUrl: 'static/icons/waste_disposal.png'});
-            
+        
+        var my_position_icon = L.icon({iconUrl: 'static/icons/my_position.png',
+                iconSize:     [30, 30],
+                iconAnchor:   [15, 15]
+            });
+        
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors'}).addTo(map);
         
         var baskets = L.markerClusterGroup({showCoverageOnHover: false});
@@ -104,6 +109,8 @@
         var reported = L.markerClusterGroup({showCoverageOnHover: false});
         {{reported|safe}}
         map.addLayer(reported);
+        
+        L.marker([{{lat}}, {{lon}}], {icon: my_position_icon}).addTo(map);
         
         var overlayMaps = {
             "Waste Baskets": baskets,
