@@ -6,6 +6,19 @@
 </head>
 
 <style>
+
+.logo
+{
+    display: inline-block;
+    scale: 2.7;
+    width: 156px;
+    height: 30px;
+        margin-top: 5px;
+        background-size: auto 43px;
+    background-image: url('static/header-t.png');
+    background-repeat: no-repeat;
+}
+
   
   body {
     background-image: url('static/background.jpeg');
@@ -25,6 +38,15 @@
 </style>
 
 <body>
+  <center>
+    <div class="logo" onclick="window.location.href='signup.html'"></div>
+  </center>
+
+  <br>
+  <br>
+  <br>
+  <br>
+
     <h1>LogIn Page</h1>
 
     <form action="{{ url_for('login') }}" method="post">
@@ -35,8 +57,6 @@
         <input type="submit" value="Log In">
     </form> 
 
-    <br>
-    <br>
     <br>
     <br>
 
