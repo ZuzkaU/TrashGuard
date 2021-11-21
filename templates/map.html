@@ -98,29 +98,33 @@ position: fixed;
 }
 
       .loginPopup {
-        left: 100px;
-        top: 100px;
         text-align: center;
         width: 100%;
-          position: absolute;
-          display: inline-block;
+        height: 100%;
           z-index: 4000;
+          justify-content: center;
       }
       .formPopup {
         display: none;
-        left: 45%;
-        top: 5%;
-        border: 3px solid #999999;
+        width: auto;
+        height: auto;
+        border: none;
         z-index: 1000;
+        margin: auto;
       position: absolute;
       z-index: 4000;
+          justify-content: center;
+          right: 50%;
       }
       .formContainer {
-        max-width: 300px;
+        width: 300px;
         padding: 20px;
         background-color: #fff;
         z-index: 1000;
-        position: absolute;
+        position: relative;
+        height: auto;
+          left: 50%;
+          right: 50%;
       }
       .formContainer input[type=text] {
         width: 100%;
@@ -158,7 +162,7 @@ position: fixed;
   <center>
     <div class="logo" onclick="window.location.href='signup.html'"></div>
   </center>
-  <div class="dropdown" style="left:20;">
+  <div class="dropdown" style="left:20;top:20;">
     <button class="dropbtn"><b>Menu</b></button>
     <div class="dropdown-content" style="left:0;">
       <a href='/login'>Profile</a>
