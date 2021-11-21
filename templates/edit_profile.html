@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
 </head>
 <style>
-  .logo
+.logo
 {
     display: inline-block;
     scale: 2.7;
@@ -12,14 +12,13 @@
     height: 30px;
         margin-top: 5px;
         background-size: auto 43px;
-    background-image: url('static/header-t.png');
+    background-image: url('header-t.png');
     background-repeat: no-repeat;
+    z-index: 4000;
 }
 </style>
 <body>
-  <center>
-    <div class="logo" onclick="window.location.href='/home'"></div>
-  </center>
+
 <div class="container">
     <div class="main-body">
     
@@ -33,6 +32,9 @@
               <div class="card mb-3">
                 <div class="card-body">
                   <div class="row">
+                    <center>
+                      <img src="../../static/header-t.png" class="logo" onclick="window.location.href='/home'">
+                    </center>
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                     <form action="{{ url_for('edit_user_data', username = username) }}" method="post">
                         <div class="col-sm-3">
