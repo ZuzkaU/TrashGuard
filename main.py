@@ -68,11 +68,14 @@ def signup():
 			return result['msg']
 		return redirect('/login')
 
-@app.route('/user/<username>', methods = ['GET', 'POST'])
+@app.route('/user/signout', methods = ['GET'])
+def signout():
+	global current_user
+	current_user = ""
+	return redirect('/home')
+
+@app.route('/user/<username>', methods = ['GET'])
 def profile(username):
-	if request.method == 'POST':
-		current_user = ""
-		return redirect('/home')
 	if request.method == 'GET':
 		# log_action("adela", "report", 1)
 		# log_action("adela", "pick", 20)
