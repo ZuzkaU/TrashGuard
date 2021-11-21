@@ -124,3 +124,12 @@ def edit_user_data(username):
 		# print(email)
 		database.update_user_data(username=username, name=name, address=address, email=email)
 		return redirect(url_for('profile', username = username))
+
+@app.route('/report', methods=['GET'])
+def report():
+	lat, lon = 48.11004353217281, 11.587360738996582
+	database.log_active_request(lat, lon, "report", "trash")
+	if current_user:
+		database.log_action(current_user, "report", 1)
+	if request.method == 'GET':
+		return redirect('/home')
