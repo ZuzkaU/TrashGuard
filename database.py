@@ -57,7 +57,9 @@ def log_action(username, action, points):
   mycursor.execute(sql, vals)
 
   user_data = get_user(username)
-  prev_points = user_data[0][2]
+  prev_points = 0
+  if user_data:
+    prev_points = user_data[2]
   sql = "update users set points = %s where username = %s"
   vals = (int(points) + prev_points, username)
   mycursor.execute(sql, vals)
@@ -89,6 +91,10 @@ def rm_requests(latitude, longitude):
   mycursor.execute(sql, vals)
   mydb.commit()
 
+def rm_request(id):
+  sql = "delete from active_requests where request_id = " + str(id)
+  mycursor.execute(sql)
+  mydb.commit()
 
 # lat, lon = 48.1105110, 11.5839377
 # log_active_request(lat, lon, "report", "asdfghjk")
